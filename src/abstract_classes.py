@@ -37,3 +37,9 @@ class FileManager(ABC):
         Запись в файл
         """
         pass
+
+    def read(self):
+        """
+        Чтение из файла
+        """
+        pass
