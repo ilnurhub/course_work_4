@@ -5,7 +5,13 @@ class APIManager(ABC):
     """
     Класс для работы с API сайтов
     """
-    pass
+
+    @abstractmethod
+    def get_vacancies(self, keyword: str) -> dict:
+        """
+        Получает вакансии
+        """
+        pass
 
 
 class FileManager(ABC):
