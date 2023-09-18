@@ -13,6 +13,18 @@ class APIManager(ABC):
         """
         pass
 
+    @abstractmethod
+    def format_data(self):
+        """
+        Приводит пришедшие по API данные к единому формату:
+        {'name': 'название вакансии',
+        'url': 'ссылка на вакансию',
+        'salary_min': 'минимальная зарплата',
+        'salary_max': 'максимальная зарплата',
+        'requirement': 'требования'}
+        """
+        pass
+
 
 class FileManager(ABC):
     """
