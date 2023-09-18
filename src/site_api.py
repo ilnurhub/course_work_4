@@ -11,3 +11,15 @@ class HeadHunterAPI(APIManager):
 
     def format_data(self):
         pass
+
+
+class SuperJobAPI(APIManager):
+    """
+    Класс для работы с сайтом https://www.superjob.ru/
+    """
+
+    def get_vacancies(self, keyword: str) -> dict:
+        pass
+
+    def format_data(self):
+        pass
