@@ -43,3 +43,9 @@ class FileManager(ABC):
         Чтение из файла
         """
         pass
+
+    def delete(self):
+        """
+        Удаление данных
+        """
+        pass
