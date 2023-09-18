@@ -30,4 +30,10 @@ class FileManager(ABC):
     """
     Класс для работы с файлами
     """
-    pass
+
+    @abstractmethod
+    def write(self, data):
+        """
+        Запись в файл
+        """
+        pass
