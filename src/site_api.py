@@ -35,7 +35,7 @@ class HeadHunterAPI(APIManager):
                 salary_max = 0
             else:
                 salary_min = item['salary']['from'] if item['salary']['from'] is not None else 0
-                salary_max = item['salary']['to'] if item['salary']['from'] is not None else 0
+                salary_max = item['salary']['to'] if item['salary']['to'] is not None else 0
             formatted_item = {
                 'name': item['name'],
                 'url': item['alternate_url'],
@@ -57,3 +57,4 @@ class SuperJobAPI(APIManager):
 
     def format_data(self):
         pass
+
