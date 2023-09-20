@@ -24,7 +24,22 @@ class HeadHunterAPI(APIManager):
         return result
 
     def format_data(self):
-        pass
+        for vacancy in self.vacancies_list:
+            if vacancy['salary'] is None:
+                salary_min = 0
+                salary_max = 0
+            else:
+                salary_min = vacancy['salary']['from'] if vacancy['salary']['from'] is not None else 0
+                salary_max = vacancy['salary']['to'] if vacancy['salary']['from'] is not None else 0
+            formatted_vacancy = {
+                'name': vacancy['name'],
+                'url': vacancy['alternate_url'],
+                'salary_min': salary_min,
+                'salary_max': salary_max,
+                'requirement': vacancy['snippet']['requirement']
+            }
+            self.formatted_vacancies.append(formatted_vacancy)
+        return self.formatted_vacancies
 
 
 class SuperJobAPI(APIManager):
