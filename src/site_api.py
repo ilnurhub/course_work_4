@@ -8,18 +8,23 @@ class HeadHunterAPI(APIManager):
     """
 
     def __init__(self):
-        self.data_list = None
+        self.data_list = []
         self.formatted_data = []
 
     def get_vacancies(self, keyword: str) -> list:
-        params = {
-            'text': f'name:{keyword}',  # Текст фильтра. В имени должно быть  ключевое слово
-            'area': 1,  # Поиск ощуществляется по вакансиям города Москва
-            'per_page': 100  # Кол-во вакансий на 1 странице
-        }
-        responce = requests.get('https://api.hh.ru/vacancies', params=params)
-        data = responce.json()
-        self.data_list = data['items']
+        page = 0
+        while page < 21:
+            params = {
+                'text': f'name:{keyword}',  # Текст фильтра. В имени должно быть  ключевое слово
+                'page': page,  # Номер страницы
+                'per_page': 100  # Кол-во вакансий на 1 странице
+            }
+            responce = requests.get('https://api.hh.ru/vacancies', params=params)
+            if responce.status_code == 400:
+                break
+            data = responce.json()['items']
+            self.data_list.extend(data)
+            page += 1
         result = self.format_data()
         return result
 
@@ -52,7 +57,3 @@ class SuperJobAPI(APIManager):
 
     def format_data(self):
         pass
-
-
-hh = HeadHunterAPI()
-print(hh.get_vacancies('python'))
