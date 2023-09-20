@@ -7,7 +7,7 @@ class APIManager(ABC):
     """
 
     @abstractmethod
-    def get_vacancies(self, keyword: str) -> dict:
+    def get_vacancies(self, keyword: str) -> list:
         """
         Получает вакансии
         """
