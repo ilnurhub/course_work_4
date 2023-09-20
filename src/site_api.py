@@ -8,8 +8,8 @@ class HeadHunterAPI(APIManager):
     """
 
     def __init__(self):
-        self.vacancies_list = None
-        self.formatted_vacancies = []
+        self.data_list = None
+        self.formatted_data = []
 
     def get_vacancies(self, keyword: str) -> list:
         params = {
@@ -18,28 +18,28 @@ class HeadHunterAPI(APIManager):
             'per_page': 100  # Кол-во вакансий на 1 странице
         }
         responce = requests.get('https://api.hh.ru/vacancies', params=params)
-        vacancies = responce.json()
-        self.vacancies_list = vacancies['items']
+        data = responce.json()
+        self.data_list = data['items']
         result = self.format_data()
         return result
 
     def format_data(self):
-        for vacancy in self.vacancies_list:
-            if vacancy['salary'] is None:
+        for item in self.data_list:
+            if item['salary'] is None:
                 salary_min = 0
                 salary_max = 0
             else:
-                salary_min = vacancy['salary']['from'] if vacancy['salary']['from'] is not None else 0
-                salary_max = vacancy['salary']['to'] if vacancy['salary']['from'] is not None else 0
-            formatted_vacancy = {
-                'name': vacancy['name'],
-                'url': vacancy['alternate_url'],
+                salary_min = item['salary']['from'] if item['salary']['from'] is not None else 0
+                salary_max = item['salary']['to'] if item['salary']['from'] is not None else 0
+            formatted_item = {
+                'name': item['name'],
+                'url': item['alternate_url'],
                 'salary_min': salary_min,
                 'salary_max': salary_max,
-                'requirement': vacancy['snippet']['requirement']
+                'requirement': item['snippet']['requirement']
             }
-            self.formatted_vacancies.append(formatted_vacancy)
-        return self.formatted_vacancies
+            self.formatted_data.append(formatted_item)
+        return self.formatted_data
 
 
 class SuperJobAPI(APIManager):
@@ -52,3 +52,7 @@ class SuperJobAPI(APIManager):
 
     def format_data(self):
         pass
+
+
+hh = HeadHunterAPI()
+print(hh.get_vacancies('python'))
