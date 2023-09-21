@@ -1,5 +1,6 @@
 from abstract_classes import APIManager
 import requests
+from config import SJ_API_KEY
 
 
 class HeadHunterAPI(APIManager):
@@ -8,12 +9,12 @@ class HeadHunterAPI(APIManager):
     """
 
     def __init__(self):
-        self.data_list = []
+        self.unformatted_data = []
         self.formatted_data = []
 
     def get_vacancies(self, keyword: str) -> list:
         page = 0
-        while page < 21:
+        while page < 5:
             params = {
                 'text': f'name:{keyword}',  # Текст фильтра. В имени должно быть  ключевое слово
                 'page': page,  # Номер страницы
@@ -23,13 +24,13 @@ class HeadHunterAPI(APIManager):
             if responce.status_code == 400:
                 break
             data = responce.json()['items']
-            self.data_list.extend(data)
+            self.unformatted_data.extend(data)
             page += 1
         result = self.format_data()
         return result
 
     def format_data(self):
-        for item in self.data_list:
+        for item in self.unformatted_data:
             if item['salary'] is None:
                 salary_min = 0
                 salary_max = 0
@@ -52,9 +53,22 @@ class SuperJobAPI(APIManager):
     Класс для работы с сайтом https://www.superjob.ru/
     """
 
-    def get_vacancies(self, keyword: str) -> dict:
-        pass
+    def get_vacancies(self, keyword: str) -> list:
+        lst = []
+        header = {
+            'X-Api-App-Id': SJ_API_KEY}
+        page = 0
+        while page < 5:
+            params = {
+                'page': page,
+                'count': 100
+            }
+            responce = requests.get(
+                f'https://api.superjob.ru/2.0/vacancies/?keywords%5B0%5D%5Bkeys%5D=&keywords%5B1%5D%5Bsrws%5D=1&keywords%5B1%5D%5Bskwc%5D=and&keywords%5B1%5D%5Bkeys%5D={keyword}',
+                params=params, headers=header)
+            data = responce.json()['objects']
+            lst.extend(data)
+            page += 1
 
     def format_data(self):
         pass
-
