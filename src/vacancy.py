@@ -4,7 +4,7 @@ class Vacancy:
     """
 
     def __init__(self, vacancy_data: dict):
-        pass
+        self.vacancy_data = self.validate_data(vacancy_data)
 
     def validate_data(self, vacancy_data: dict):
         """
@@ -26,4 +26,4 @@ class Vacancy:
         """
         Вычисляет среднюю зарплату
         """
-        pass
+        return (salary_min + salary_max) // 2
