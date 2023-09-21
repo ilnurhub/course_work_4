@@ -2,4 +2,5 @@ class Vacancy:
     """
     Класс для работы с вакансиями
     """
-    pass
+    def __init__(self, vacancy_data:dict):
+        pass
