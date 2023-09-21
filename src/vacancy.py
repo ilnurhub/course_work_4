@@ -8,6 +8,12 @@ class Vacancy:
         self.__average_salary = self.calculate_average_salary(self.__vacancy_data['salary_min'],
                                                               self.__vacancy_data['salary_max'])
 
+    def __lt__(self, other):
+        """
+        Возвращает результат сравнения "меньше" двух вакансий по средней зарплате
+        """
+        return self.average_salary < other.average_salary
+
     @property
     def vacancy_data(self):
         return self.__vacancy_data
@@ -15,6 +21,7 @@ class Vacancy:
     @property
     def average_salary(self):
         return self.__average_salary
+
 
     def validate_data(self, vacancy_data: dict):
         """
@@ -37,3 +44,5 @@ class Vacancy:
         Вычисляет среднюю зарплату
         """
         return (salary_min + salary_max) // 2
+
+
