@@ -14,6 +14,12 @@ class Vacancy:
         """
         return self.average_salary < other.average_salary
 
+    def __gt__(self, other):
+        """
+        Возвращает результат сравнения "больше" двух вакансий по средней зарплате
+        """
+        return self.average_salary > other.average_salary
+
     @property
     def vacancy_data(self):
         return self.__vacancy_data
@@ -21,7 +27,6 @@ class Vacancy:
     @property
     def average_salary(self):
         return self.__average_salary
-
 
     def validate_data(self, vacancy_data: dict):
         """
@@ -44,5 +49,3 @@ class Vacancy:
         Вычисляет среднюю зарплату
         """
         return (salary_min + salary_max) // 2
-
-
