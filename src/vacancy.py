@@ -4,7 +4,13 @@ class Vacancy:
     """
 
     def __init__(self, vacancy_data: dict):
-        self.vacancy_data = self.validate_data(vacancy_data)
+        self.__vacancy_data = self.validate_data(vacancy_data)
+        self.average_salary = self.calculate_average_salary(self.__vacancy_data['salary_min'],
+                                                            self.__vacancy_data['salary_max'])
+
+    @property
+    def vacancy_data(self):
+        return self.__vacancy_data
 
     def validate_data(self, vacancy_data: dict):
         """
