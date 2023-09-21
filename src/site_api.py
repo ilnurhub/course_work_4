@@ -52,8 +52,7 @@ class SuperJobAPI(APIManager):
     """
     Класс для работы с сайтом https://www.superjob.ru/
     """
-
-    def __int__(self):
+    def __init__(self):
         self.unformatted_data = []
         self.formatted_data = []
 
@@ -67,15 +66,23 @@ class SuperJobAPI(APIManager):
                 'count': 100
             }
             responce = requests.get(
-                f'https://api.superjob.ru/2.0/vacancies/?keywords%5B0%5D%5Bkeys%5D=&keywords%5B1%5D%5Bsrws%5D=1&keywords%5B1%5D%5Bskwc%5D=and&keywords%5B1%5D%5Bkeys%5D={keyword}',
+                f'https://api.superjob.ru/2.0/vacancies/?keywords%5B0%5D%5Bkeys%5D=&keywords%5B1%5D%5Bsrws%5D=1&'
+                f'keywords%5B1%5D%5Bskwc%5D=and&keywords%5B1%5D%5Bkeys%5D={keyword}',
                 params=params, headers=header)
             data = responce.json()['objects']
             self.unformatted_data.extend(data)
             page += 1
+        result = self.format_data()
+        return result
 
     def format_data(self):
-        pass
-
-
-sj = SuperJobAPI()
-sj.get_vacancies('врач')
+        for item in self.unformatted_data:
+            formatted_item = {
+                'name': item['profession'],
+                'url': item['link'],
+                'salary_min': item['payment_from'],
+                'salary_max': item['payment_to'],
+                'requirement': item['vacancyRichText']
+            }
+            self.formatted_data.append(formatted_item)
+        return self.formatted_data
