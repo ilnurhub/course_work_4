@@ -42,7 +42,7 @@ class HeadHunterAPI(APIManager):
                 'url': item['alternate_url'],
                 'salary_min': salary_min,
                 'salary_max': salary_max,
-                'requirement': item['snippet']['requirement']
+                'description/requirement': item['snippet']['requirement']
             }
             self.formatted_data.append(formatted_item)
         return self.formatted_data
@@ -82,7 +82,7 @@ class SuperJobAPI(APIManager):
                 'url': item['link'],
                 'salary_min': item['payment_from'],
                 'salary_max': item['payment_to'],
-                'requirement': item['vacancyRichText']
+                'description/requirement': item['vacancyRichText']
             }
             self.formatted_data.append(formatted_item)
         return self.formatted_data

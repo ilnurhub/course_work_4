@@ -21,7 +21,7 @@ class APIManager(ABC):
         'url': 'ссылка на вакансию',
         'salary_min': 'минимальная зарплата',
         'salary_max': 'максимальная зарплата',
-        'requirement': 'требования'}
+        'description/requirement': 'описание или требования'}
         """
         pass
 
