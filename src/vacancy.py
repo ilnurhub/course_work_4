@@ -20,6 +20,12 @@ class Vacancy:
         """
         return self.average_salary > other.average_salary
 
+    def __eq__(self, other):
+        """
+        Возвращает результат сравнения "равно" двух вакансий по средней зарплате
+        """
+        return self.average_salary == other.average_salary
+
     @property
     def vacancy_data(self):
         return self.__vacancy_data
