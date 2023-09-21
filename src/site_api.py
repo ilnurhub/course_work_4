@@ -53,8 +53,11 @@ class SuperJobAPI(APIManager):
     Класс для работы с сайтом https://www.superjob.ru/
     """
 
+    def __int__(self):
+        self.unformatted_data = []
+        self.formatted_data = []
+
     def get_vacancies(self, keyword: str) -> list:
-        lst = []
         header = {
             'X-Api-App-Id': SJ_API_KEY}
         page = 0
@@ -67,8 +70,12 @@ class SuperJobAPI(APIManager):
                 f'https://api.superjob.ru/2.0/vacancies/?keywords%5B0%5D%5Bkeys%5D=&keywords%5B1%5D%5Bsrws%5D=1&keywords%5B1%5D%5Bskwc%5D=and&keywords%5B1%5D%5Bkeys%5D={keyword}',
                 params=params, headers=header)
             data = responce.json()['objects']
-            lst.extend(data)
+            self.unformatted_data.extend(data)
             page += 1
 
     def format_data(self):
         pass
+
+
+sj = SuperJobAPI()
+sj.get_vacancies('врач')
