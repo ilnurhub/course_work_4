@@ -44,7 +44,7 @@ class FileManager(ABC):
         """
         pass
 
-    def delete(self):
+    def delete(self, data):
         """
         Удаление данных
         """
