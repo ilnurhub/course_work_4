@@ -18,7 +18,9 @@ class JSONFileManager(FileManager):
             json.dump(data, file, indent=4)
 
     def read(self):
-        pass
+        with open(self.filepath, 'r', encoding='utf-8') as file:
+            list_of_data = json.load(file)
+        return list_of_data
 
     def delete(self, data):
         pass
