@@ -23,4 +23,6 @@ class JSONFileManager(FileManager):
         return list_of_data
 
     def delete(self, data):
-        pass
+        list_of_data = self.read()
+        list_of_data.remove(data)
+        self.write(list_of_data)
