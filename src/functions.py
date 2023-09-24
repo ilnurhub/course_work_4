@@ -38,4 +38,4 @@ def get_top_vacancies(vacancies, top_n):
     """
     Возвращает заданное количество вакансий
     """
-    pass
+    return vacancies[:top_n]
