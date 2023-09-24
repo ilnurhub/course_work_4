@@ -13,9 +13,17 @@ def choice():
 
 def filter_vacancies(vacancies, filter_words):
     """
-    Возраващает отфильтрованные по ключевым словам вакансии
+    Возвращает отфильтрованные по ключевым словам вакансии
     """
-    pass
+    list_of_filtered_vacancies = []
+    for vacancy in vacancies:
+        filter_word_count = 0
+        for filter_word in filter_words:
+            if filter_word.lower() in vacancy.vacancy_data['description/requirement'].lower():
+                filter_word_count += 1
+        if filter_word_count == len(filter_words):
+            list_of_filtered_vacancies.append(vacancy)
+    return list_of_filtered_vacancies
 
 
 def sort_vacancies(vacancies):
