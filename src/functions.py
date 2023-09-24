@@ -22,7 +22,8 @@ def sort_vacancies(vacancies):
     """
     Возвращает отсортированные вакансии
     """
-    pass
+    sorted_vacancies = sorted(vacancies, key=lambda x: x.average_salary, reverse=True)
+    return sorted_vacancies
 
 
 def get_top_vacancies(vacancies, top_n):
