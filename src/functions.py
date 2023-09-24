@@ -23,3 +23,10 @@ def sort_vacancies(vacancies):
     Возвращает отсортированные вакансии
     """
     pass
+
+
+def get_top_vacancies(vacancies, top_n):
+    """
+    Возвращает заданное количество вакансий
+    """
+    pass
