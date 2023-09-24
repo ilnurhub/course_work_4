@@ -16,3 +16,10 @@ def filter_vacancies(vacancies, filter_words):
     Возраващает отфильтрованные по ключевым словам вакансии
     """
     pass
+
+
+def sort_vacancies(vacancies):
+    """
+    Возвращает отсортированные вакансии
+    """
+    pass
