@@ -9,3 +9,10 @@ def choice():
 0 - выход
 """)
     return user_choice
+
+
+def filter_vacancies(vacancies, filter_words):
+    """
+    Возраващает отфильтрованные по ключевым словам вакансии
+    """
+    pass
